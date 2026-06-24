@@ -1,0 +1,26 @@
+name: Build .NET API
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pobranie kodu repozytorium (Checkout)
+      uses: actions/checkout@v4
+
+    - name: Konfiguracja środowiska .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Przywrócenie zależności (Restore)
+      run: dotnet restore EcommerceApi.csproj
+
+    - name: Budowa aplikacji (Build)
+      run: dotnet build EcommerceApi.csproj --no-restore

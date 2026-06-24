@@ -126,3 +126,4 @@ E:\github programy\Ćwiczenie_z_Azure\EcommerceApi\obj\Debug\net8.0\refint\Ecomm
 E:\github programy\Ćwiczenie_z_Azure\EcommerceApi\obj\Debug\net8.0\EcommerceApi.pdb
 E:\github programy\Ćwiczenie_z_Azure\EcommerceApi\obj\Debug\net8.0\EcommerceApi.genruntimeconfig.cache
 E:\github programy\Ćwiczenie_z_Azure\EcommerceApi\obj\Debug\net8.0\ref\EcommerceApi.dll
+E:\github programy\Ćwiczenie_z_Azure\EcommerceApi\obj\Debug\net8.0\EcommerceApi.sourcelink.json

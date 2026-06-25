@@ -38,3 +38,20 @@ Aby pobrać lub zmodyfikować dane, użyj pełnej ścieżki do wybranego endpoin
 * `GET /api/Products` - Zwraca listę wszystkich produktów (pełny link: https://krzysztof-ecommerce-api-dpcpa4dtgadvangu.polandcentral-01.azurewebsites.net/api/Products)
 * `GET /api/Orders` - Zwraca listę zamówień wraz z przypisanymi produktami
 * `POST /api/Products` - Dodaje nowy produkt (wymaga przesłania obiektu JSON)
+
+**Przykładowy payload dla metody POST:**
+```json
+{
+  "name": "Słuchawki Bezprzewodowe",
+  "price": 350.00
+}
+```
+## Dalszy rozwój: Infrastruktura jako kod (Część 4 na gwiazdke)
+
+Zadanie wspomina o możliwości napisania infrastruktury jako kod przy użyciu technologii Bicep. Ponieważ Bicep to dla mnie na ten moment zupełnie nowa technologia, postanowiłem skupić się na dowiezieniu działającej aplikacji i skonfigurowałem środowisko bezpośrednio w portalu Azure. 
+
+Wiem jednak, że w prawdziwych projektach serwerów nie stawia się ręcznie. Zgodnie z sugestią w zadaniu, żeby pokazać swój tok myślenia, oto jak zaplanowałbym wdrożenie Bicepa w kolejnych krokach:
+
+1. **Zdefiniowanie infrastruktury:** Stworzyłbym plik, w którym opisałbym dokładnie to, co wcześniej wyklikałem w portalu – czyli darmowy plan App Service oparty na Linuksie i środowisko gotowe na .NET 8.
+2. **Kwestia uprawnień:** Aby GitHub mógł cokolwiek zbudować w mojej chmurze, musiałbym utworzyć w Azure konto serwisowe (Service Principal). Wygenerowane dla niego poświadczenia schowałbym bezpiecznie w zakładce Secrets na GitHubie.
+3. **Rozbudowa pipeline'u:** Do mojego pliku dodałbym dwa nowe zadania. Zanim skompilowana aplikacja poleciałaby na serwer, GitHub Actions najpierw logowałby się do Azure i uruchamiał skrypt Bicep upewniając się, że "pusta" infrastruktura jest gotowa na przyjęcie kodu.

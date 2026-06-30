@@ -35,24 +35,32 @@ namespace EcommerceApi.Controllers
             return product;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+[HttpPost]
+public async Task<ActionResult<Product>> PostProduct(ProductCreateDto productDto)
+{
+    var product = new Product
+    {
+        Name = productDto.Name,
+        Price = productDto.Price
+    };
 
-            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
-        }
+    _context.Products.Add(product);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+}
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutProduct(int id, ProductCreateDto productDto)
         {
-            if (id != product.Id)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            product.Name = productDto.Name;
+            product.Price = productDto.Price;
 
             try
             {
